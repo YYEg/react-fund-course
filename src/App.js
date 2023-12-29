@@ -1,19 +1,29 @@
-import React, {useState} from "react";
-function App() {
-    const [likes, setLikes] = useState(0)
+import React, {useRef, useState} from "react";
+import Counter from "./Components/Counter";
+import ClassCounter from "./Components/ClassCounter";
+import './styles/App.css'
+import PostItem from "./Components/PostItem";
+import PostList from "./Components/PostList";
+import MyButton from "./Components/UI/button/MyButton";
+import MyInput from "./Components/UI/input/MyInput";
+import PostForm from "./Components/PostForm";
 
-    function increment(){
-        setLikes(likes + 1)
-    }
-    function decrement(){
-        setLikes(likes - 1)
+function App() {
+    const [posts, setPosts] = useState([
+        {id: 1, title: 'javascript', body: 'Description'},
+        {id: 2, title: 'javascript2', body: 'Description'},
+        {id: 3, title: 'javascript3', body: 'Description'},
+    ])
+
+
+    const createPost = (newPost) => {
+        setPosts([...posts, newPost])
     }
 
   return (
     <div className="App">
-        <h1>{likes}</h1>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
+        <PostForm create={createPost}/>
+        <PostList posts={posts} title="Список постов 1"/>
     </div>
   );
 }
